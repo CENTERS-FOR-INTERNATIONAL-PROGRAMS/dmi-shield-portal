@@ -1,0 +1,91 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Upload your data</h4>
+                        <button mat-raised-button type="submit" class=" mt-2 mat-button mat-button-base mat-raised-button custom-white-button card-category " style="color: red;" (click)="downloadCSV()">
+                            Download Sample CSV
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="uploadCsvFrom" (ngSubmit)="onFormSubmit()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="file" (change)="onFileChange($event)" accept=".csv" formControlName="csvFile">
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="csvDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                        <!--                      <form>-->
+                        <!--                          <div class="row">-->
+                        <!--                              <div class="col-md-6">-->
+                        <!--                                  <mat-form-field class="example-full-width">-->
+                        <!--                                    <input matInput placeholder="Username">-->
+                        <!--                                  </mat-form-field>-->
+                        <!--                              </div>-->
+                        <!--                          </div>-->
+                        <!--                          <div class="row">-->
+                        <!--                              <div class="col-md-12">-->
+                        <!--                                <label>About Me</label>-->
+                        <!--                                <mat-form-field class="example-full-width">-->
+                        <!--                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>-->
+                        <!--                                 </mat-form-field>-->
+                        <!--                              </div>-->
+                        <!--                          </div>-->
+                        <!--                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>-->
+                        <!--                          <div class="clearfix"></div>-->
+                        <!--                      </form>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Submitted Records History</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>6th November 2023 - 150 Records</li>
+                            <li>13th November 2023 - 150 Records</li>
+                            <li>20th November 2023 - 150 Records</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--          <div class="col-md-4">-->
+            <!--              <div class="card card-profile">-->
+            <!--                  <div class="card-avatar">-->
+            <!--                      <a href="javascript:void(0)">-->
+            <!--                          <img class="img" src="./assets/img/faces/marc.jpg" />-->
+            <!--                      </a>-->
+            <!--                  </div>-->
+            <!--                  <div class="card-body">-->
+            <!--                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>-->
+            <!--                      <h4 class="card-title">Alec Thompson</h4>-->
+            <!--                      <p class="card-description">-->
+            <!--                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...-->
+            <!--                      </p>-->
+            <!--                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>-->
+            <!--                  </div>-->
+            <!--              </div>-->
+            <!--          </div>-->
+        </div>
+    </div>
+</div>
