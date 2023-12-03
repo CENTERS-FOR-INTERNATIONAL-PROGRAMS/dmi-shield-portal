@@ -25,7 +25,7 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   declarations: [
     AppComponent,

@@ -11,6 +11,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class DashboardComponent implements OnInit {
 
     uploadCsvFrom: FormGroup;
+    selectedCsvType: string;
+    selectedCsvFilePath: string
 
     constructor(private http: HttpClient, private fb: FormBuilder) { }
 
@@ -18,13 +20,29 @@ export class DashboardComponent implements OnInit {
         this.createForm();
     }
 
+    taken_actions = [
+        { value: 'sari_ili', viewValue: 'SARI ILI' },
+        { value: 'moh_503', viewValue: 'MOH 503' },
+    ];
+
+    csvTypes = [
+        { value: 'sari_ili', viewValue: 'SARI ILI' },
+        { value: 'moh_503', viewValue: 'MOH 503' },
+    ];
+
     downloadCSV() {
-        // Replace 'your-csv-file.csv' with the actual file path in your project
-        const filePath = 'assets/csv_samples/KENYA_MOH_503.xlsx';
+        if(this.selectedCsvType === 'sari_ili')
+        {
+            this.selectedCsvFilePath = 'assets/csv_samples/SARI_ILI_Dataset_sample.csv';
+        }
+        else if(this.selectedCsvType === 'moh_503')
+        {
+            this.selectedCsvFilePath = 'assets/csv_samples/MOH_503.csv';
+        }
 
-        const fileName = filePath.split('/').pop();
+        const fileName = this.selectedCsvFilePath.split('/').pop();
 
-        this.http.get(filePath, { responseType: 'blob' })
+        this.http.get(this.selectedCsvFilePath, { responseType: 'blob' })
             .subscribe((data: any) => {
                 const blob = new Blob([data], { type: 'application/csv' });
                 const downloadLink = document.createElement('a');
@@ -32,6 +50,8 @@ export class DashboardComponent implements OnInit {
                 downloadLink.download = fileName || 'your-downloaded-file.csv';
                 downloadLink.click();
             });
+
+
     }
 
 
@@ -39,7 +59,8 @@ export class DashboardComponent implements OnInit {
         // Define your form controls here
         this.uploadCsvFrom = this.fb.group({
             csvFile: [null, Validators.required],
-            csvDate: ['', Validators.required]
+            csvDate: ['', Validators.required],
+            csvType: ['', Validators.required],
         });
     }
 

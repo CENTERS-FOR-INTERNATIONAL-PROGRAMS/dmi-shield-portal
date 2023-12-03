@@ -11,11 +11,14 @@
                     </div>
                     <div class="card-body">
                         <h6 class="card-category text-gray">Account User</h6>
-                        <h4 class="card-title">John Doe</h4>
+                        <h4 class="card-title">{{ currentUser.fullName }}</h4>
                         <p class="card-description">
                             System User
                         </p>
-                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Sign out</a>-->
+
+                        <button mat-raised-button class="btn btn-danger pull-right" (click)="signOut()">
+                            Sign Out
+                        </button>
                     </div>
                 </div>
             </div>

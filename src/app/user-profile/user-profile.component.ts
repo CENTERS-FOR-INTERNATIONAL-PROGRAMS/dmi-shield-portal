@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {KVFormControl} from "../models/KVFormControl.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
 
 @Component({
     selector: 'app-user-profile',
@@ -11,29 +12,21 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 export class UserProfileComponent implements OnInit {
     FCUploadCsv: KVFormControl = {};
     uploadCsvFrom: FormGroup;
+    currentUser: any;
 
-    constructor(private http: HttpClient, private fb: FormBuilder) { }
+    constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService) { }
 
     ngOnInit() {
-        this.createForm();
+        this.getCurrentUser();
     }
 
-    downloadCSV() {
-        // Replace 'your-csv-file.csv' with the actual file path in your project
-        const filePath = 'assets/csv_samples/KENYA_MOH_503.xlsx';
-
-        const fileName = filePath.split('/').pop();
-
-        this.http.get(filePath, { responseType: 'blob' })
-            .subscribe((data: any) => {
-                const blob = new Blob([data], { type: 'application/csv' });
-                const downloadLink = document.createElement('a');
-                downloadLink.href = window.URL.createObjectURL(blob);
-                downloadLink.download = fileName || 'your-downloaded-file.csv';
-                downloadLink.click();
-            });
+    getCurrentUser(){
+        this.currentUser = this.authService.getUserData();
     }
 
+    signOut(){
+        this.authService.removeUserData()
+    }
 
     createForm() {
         // Define your form controls here
