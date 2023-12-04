@@ -13,18 +13,25 @@
                             <div class="row">
                                 <div class="col-md-6 offset-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Email" formControlName="email">
+                                        <input matInput placeholder="Email" formControlName="email" required>
+                                        <mat-error *ngIf="loginForm.get('email').hasError('required')">Email is required</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 offset-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput  type="password" placeholder="Password" formControlName="password">
+                                        <input matInput  type="password" placeholder="Password" formControlName="password" required>
+                                        <mat-error *ngIf="loginForm.get('password').hasError('required')">Password is required</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Login</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isLoginLoading">
+                                <span *ngIf="isLoginLoading">Loading...</span>
+                                <span *ngIf="!isLoginLoading">Login</span>
+                            </button>
+                            <mat-error *ngIf="loginError">Incorrect email or password</mat-error>
+
                             <div class="clearfix"></div>
                         </form>
                     </div>

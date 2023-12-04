@@ -3,8 +3,19 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-danger" style="display: flex; justify-content: space-between; align-items: start;">
+
                         <h4 class="card-title">Upload your data</h4>
+
+                        <mat-form-field>
+                            <mat-label style="color: white;">Select CSV Type to Download</mat-label>
+                            <mat-select style="color: white;" [(value)]="selectedCsvType">
+                                <mat-option *ngFor="let csvType of csvTypes" [value]="csvType.value">
+                                    {{ csvType.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
                         <button mat-raised-button type="submit" class=" mt-2 mat-button mat-button-base mat-raised-button custom-white-button card-category " style="color: red;" (click)="downloadCSV()">
                             Download Sample CSV
                         </button>
@@ -13,21 +24,37 @@
                         <form [formGroup]="uploadCsvFrom" (ngSubmit)="onFormSubmit()">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="file" (change)="onFileChange($event)" accept=".csv" formControlName="csvFile">
-
+                                    <input type="file" (change)="onFileChange($event)" accept=".csv" formControlName="csvFile" required>
+                                    <mat-error *ngIf="uploadCsvFrom.get('csvFile').hasError('required')">File is required</mat-error>
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="csvDate">
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="csvDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
+                                        <mat-error *ngIf="uploadCsvFrom.get('csvDate').hasError('required')">Please pick a date</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select formControlName="csvType" placeholder="Type of data" required>
+                                            <mat-option *ngFor="let action of taken_actions" [value]="action.value">
+                                                {{ action.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="uploadCsvFrom.get('csvType').hasError('required')">Specify Type of data</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+
+                            <div class="row mt-4">
+
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit File</button>
                             <div class="clearfix"></div>
                         </form>
                         <!--                      <form>-->
