@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
     selectedCsvFilePath: string
     isUploadLoading: boolean;
     uploadError: boolean = false;
-    uploadResponse: string
+    uploadResponse: string;
+    uploadSuccess: boolean;
 
     constructor(private router: Router, private http: HttpClient, private fb: FormBuilder, private uploadService: UploadDocumentService) { }
 
@@ -83,6 +84,7 @@ export class DashboardComponent implements OnInit {
                         console.log('Upload successful:', responseData);
                         this.isUploadLoading = false;
                         this.uploadResponse = responseData['message'];
+                        this.uploadSuccess = responseData['success'];
                         //{"message":"Document submitted successfully","data":null,"success":true}
                     },
                     error: (error) => {
@@ -90,9 +92,9 @@ export class DashboardComponent implements OnInit {
                             // Handle 401 Unauthorized error here
                             this.router.navigate(['/login']);
                         }
-                        console.error('Login error:', error);
                         this.isUploadLoading = false;
                         this.uploadError = true;
+                        this.uploadResponse = error.error['message'];
                         // Handle error
                     },
                     complete: () => {

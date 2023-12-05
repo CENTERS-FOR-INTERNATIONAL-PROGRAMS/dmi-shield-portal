@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {LoginScreenComponent} from "./login-screen/login-screen.component";
 import {AuthenticationGuard} from "./guard/authentication.guard";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes =[
   {
@@ -19,6 +20,10 @@ const routes: Routes =[
   {
     path: 'login',
     component: LoginScreenComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '',

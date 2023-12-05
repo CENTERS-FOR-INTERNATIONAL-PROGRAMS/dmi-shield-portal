@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {LoginType} from "../types/LoginType";
+import {FetchLoginDataType, LoginType} from "../types/LoginType";
+import {ConfigService} from "./config.service";
+import {RegisterType} from "../types/RegisterType";
+import {VerifyCodeType} from "../types/VerifyCodeType";
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +13,29 @@ export class AuthService {
   private tokenKey = 'authToken';
   private userDataKey = 'userData';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configService: ConfigService) { }
 
   loginUser(loginPayload : LoginType){
-    let url = "http://localhost:3001/api/v1/login";
-
-
-    return this.http.post(url, loginPayload)
+    const url = `${this.configService.getBaseUrl()}/login`;
+    return this.http.post(url, loginPayload);
   }
+
+  registerUser(loginPayload : RegisterType){
+    const url = `${this.configService.getBaseUrl()}/signup`;
+    return this.http.post(url, loginPayload);
+  }
+
+  verifyCode(loginPayload : VerifyCodeType){
+    const url = `${this.configService.getBaseUrl()}/verify-code`;
+    return this.http.post(url, loginPayload);
+  }
+
+  fetchLoginData(payload : FetchLoginDataType){
+    const url = `${this.configService.getBaseUrl()}/fetch-login-data`;
+    return this.http.post(url, payload);
+  }
+
+
 
   saveUser(data: any): void {
     localStorage.removeItem(this.userDataKey);

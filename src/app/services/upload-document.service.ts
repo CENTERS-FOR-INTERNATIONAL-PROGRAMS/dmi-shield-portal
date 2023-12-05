@@ -12,14 +12,16 @@ export class UploadDocumentService {
 
   uploadDocument(file: File, csvType: string, dateUploaded: Date) {
     // let url = "http://localhost:5001/saveToSql";
-    let url = "http://localhost:3001/api/v1/documents";
+    let url = "http://localhost:5001/api/v1/documents";
+    // let url = "http://localhost:3001/api/v1/documents";
 
     // Create FormData object
     const formData: FormData = new FormData();
 
     let params = new HttpParams()
         .set('uploadDocType', csvType)
-        .set('dateUploaded', dateUploaded.toISOString());
+        .set('dateUploaded', dateUploaded.toISOString())
+        .set('userId', this.authService.getUserData()['userId']);
 
     // Append the file to FormData
     formData.append('csvFile', file, file.name);

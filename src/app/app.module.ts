@@ -12,24 +12,30 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { RegisterComponent } from './register/register.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ComponentsModule,
-    RouterModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ComponentsModule,
+        RouterModule,
+        AppRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonModule,
+    ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    RegisterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
