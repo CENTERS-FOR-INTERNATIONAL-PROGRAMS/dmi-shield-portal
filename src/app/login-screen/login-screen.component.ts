@@ -42,25 +42,25 @@ export class LoginScreenComponent implements OnInit {
         password: this.loginForm.get('password').value,
       }
 
-      this.isLoginLoading = false;
-      this.router.navigate(['/dashboard']);
-      // this.authService.loginUser(payload)
-      //     .subscribe({
-      //       next: (responseData) => {
-      //         console.log('Login successful:', responseData);
-      //         this.authService.saveUser(responseData['data'])
-      //         this.router.navigate(['/dashboard']);
-      //       },
-      //       error: (error) => {
-      //         console.error('Login error:', error);
-      //         this.isLoginLoading = false;
-      //         this.loginError = true;
-      //         // Handle error
-      //       },
-      //       complete: () => {
-      //         this.isLoginLoading = false;
-      //       }
-      //     });
+      // this.isLoginLoading = false;
+      // this.router.navigate(['/dashboard']);
+      this.authService.loginUser(payload)
+          .subscribe({
+            next: (responseData) => {
+              console.log('Login successful:', responseData);
+              this.authService.saveUser(responseData['data'])
+              this.router.navigate(['/dashboard']);
+            },
+            error: (error) => {
+              console.error('Login error:', error);
+              this.isLoginLoading = false;
+              this.loginError = true;
+              // Handle error
+            },
+            complete: () => {
+              this.isLoginLoading = false;
+            }
+          });
 
     }
 

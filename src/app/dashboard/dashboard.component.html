@@ -24,8 +24,8 @@
                         <form [formGroup]="uploadCsvFrom" (ngSubmit)="onFormSubmit()">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="file" (change)="onFileChange($event)" accept=".csv" formControlName="csvFile" required>
-                                    <mat-error *ngIf="uploadCsvFrom.get('csvFile').hasError('required')">File is required</mat-error>
+                                    <input type="file" (change)="onFileChange($event)" accept=".csv" required>
+<!--                                    <mat-error *ngIf="uploadCsvFrom.get('csvFile').hasError('required')">File is required</mat-error>-->
                                 </div>
                             </div>
 
@@ -51,10 +51,15 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-4">
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isUploadLoading">
+                                <span *ngIf="isUploadLoading">Submitting...</span>
+                                <span *ngIf="!isUploadLoading">Upload File</span>
+                            </button>
 
-                            </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit File</button>
+                            <span class="text-success" *ngIf="uploadResponse">Submitted Successfully</span>
+
+                            <mat-error *ngIf="uploadError">Please try again later</mat-error>
+
                             <div class="clearfix"></div>
                         </form>
                         <!--                      <form>-->

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginType} from "../types/LoginType";
 
@@ -36,6 +36,10 @@ export class AuthService {
   getUserData(): any | null {
     const dataString = localStorage.getItem(this.userDataKey);
     return dataString ? JSON.parse(dataString) : null;
+  }
+
+  getUserToken(): any | null {
+    return localStorage.getItem(this.tokenKey);
   }
 
   removeUserData(): void {

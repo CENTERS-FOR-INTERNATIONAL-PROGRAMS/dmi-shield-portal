@@ -11,7 +11,7 @@ import {AuthenticationGuard} from "./guard/authentication.guard";
 const routes: Routes =[
   {
     path: '',
-    // canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     redirectTo: 'dashboard',
     // redirectTo: 'login',
     pathMatch: 'full',
@@ -22,7 +22,7 @@ const routes: Routes =[
   },
   {
     path: '',
-    // canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     component: AdminLayoutComponent,
     children: [{
       path: '',
