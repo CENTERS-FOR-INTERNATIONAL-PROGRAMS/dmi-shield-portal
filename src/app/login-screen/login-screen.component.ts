@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {FetchLoginDataType, LoginType} from "../types/LoginType";
@@ -26,6 +26,7 @@ export class LoginScreenComponent implements OnInit {
   resendOtpPayload: LoginType;
   isResendLoading: boolean = false;
   resendError: boolean = false;
+
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -55,8 +56,20 @@ export class LoginScreenComponent implements OnInit {
     });
   }
 
+  resetVerifyFormControls(controls: { [key: string]: AbstractControl }): void {
+    Object.values(controls).forEach(control => {
+      control.reset();
+      control.setErrors(null);
+    });
+  }
+
+  resetVerificationForm() {
+    this.resetVerifyFormControls(this.verificationForm.controls);
+  }
+
+
   onClickResendOtp(){
-    this.createVerifyForm();
+    this.resetVerificationForm();
     this.verificationError = false;
 
     this.isResendLoading = true;
