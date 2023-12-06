@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {KVFormControl} from "../models/KVFormControl.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-user-profile',
@@ -14,7 +15,7 @@ export class UserProfileComponent implements OnInit {
     uploadCsvFrom: FormGroup;
     currentUser: any;
 
-    constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService) { }
+    constructor(private router: Router, private http: HttpClient, private fb: FormBuilder, private authService: AuthService) { }
 
     ngOnInit() {
         this.getCurrentUser();
@@ -26,6 +27,7 @@ export class UserProfileComponent implements OnInit {
 
     signOut(){
         this.authService.removeUserData()
+        this.router.navigate(['/login']);
     }
 
     createForm() {

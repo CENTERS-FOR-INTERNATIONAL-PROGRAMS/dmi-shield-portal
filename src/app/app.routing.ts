@@ -7,11 +7,12 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {LoginScreenComponent} from "./login-screen/login-screen.component";
 import {AuthenticationGuard} from "./guard/authentication.guard";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes =[
   {
     path: '',
-    // canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     redirectTo: 'dashboard',
     // redirectTo: 'login',
     pathMatch: 'full',
@@ -21,8 +22,12 @@ const routes: Routes =[
     component: LoginScreenComponent
   },
   {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
     path: '',
-    // canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     component: AdminLayoutComponent,
     children: [{
       path: '',

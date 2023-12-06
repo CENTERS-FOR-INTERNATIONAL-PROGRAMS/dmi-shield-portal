@@ -24,8 +24,8 @@
                         <form [formGroup]="uploadCsvFrom" (ngSubmit)="onFormSubmit()">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="file" (change)="onFileChange($event)" accept=".csv" formControlName="csvFile" required>
-                                    <mat-error *ngIf="uploadCsvFrom.get('csvFile').hasError('required')">File is required</mat-error>
+                                    <input type="file" (change)="onFileChange($event)" accept=".csv" required>
+<!--                                    <mat-error *ngIf="uploadCsvFrom.get('csvFile').hasError('required')">File is required</mat-error>-->
                                 </div>
                             </div>
 
@@ -51,31 +51,17 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-4">
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isUploadLoading">
+                                <span *ngIf="isUploadLoading">Submitting...</span>
+                                <span *ngIf="!isUploadLoading">Upload File</span>
+                            </button>
 
-                            </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit File</button>
+                            <span class="text-primary" *ngIf="uploadSuccess">{{ uploadResponse }}</span>
+
+<!--                            <mat-error *ngIf="uploadError">{{ uploadResponse }}</mat-error>-->
+
                             <div class="clearfix"></div>
                         </form>
-                        <!--                      <form>-->
-                        <!--                          <div class="row">-->
-                        <!--                              <div class="col-md-6">-->
-                        <!--                                  <mat-form-field class="example-full-width">-->
-                        <!--                                    <input matInput placeholder="Username">-->
-                        <!--                                  </mat-form-field>-->
-                        <!--                              </div>-->
-                        <!--                          </div>-->
-                        <!--                          <div class="row">-->
-                        <!--                              <div class="col-md-12">-->
-                        <!--                                <label>About Me</label>-->
-                        <!--                                <mat-form-field class="example-full-width">-->
-                        <!--                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>-->
-                        <!--                                 </mat-form-field>-->
-                        <!--                              </div>-->
-                        <!--                          </div>-->
-                        <!--                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>-->
-                        <!--                          <div class="clearfix"></div>-->
-                        <!--                      </form>-->
                     </div>
                 </div>
             </div>
@@ -95,24 +81,6 @@
                 </div>
             </div>
 
-
-            <!--          <div class="col-md-4">-->
-            <!--              <div class="card card-profile">-->
-            <!--                  <div class="card-avatar">-->
-            <!--                      <a href="javascript:void(0)">-->
-            <!--                          <img class="img" src="./assets/img/faces/marc.jpg" />-->
-            <!--                      </a>-->
-            <!--                  </div>-->
-            <!--                  <div class="card-body">-->
-            <!--                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>-->
-            <!--                      <h4 class="card-title">Alec Thompson</h4>-->
-            <!--                      <p class="card-description">-->
-            <!--                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...-->
-            <!--                      </p>-->
-            <!--                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>-->
-            <!--                  </div>-->
-            <!--              </div>-->
-            <!--          </div>-->
         </div>
     </div>
 </div>
