@@ -23,7 +23,9 @@ export class LoginScreenComponent implements OnInit {
   showVerificationForm: boolean = false;
   isVerificationLoading: boolean = false;
   verificationError: boolean = false;
-
+  resendOtpPayload: LoginType;
+  isResendLoading: boolean = false;
+  resendError: boolean = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -53,6 +55,35 @@ export class LoginScreenComponent implements OnInit {
     });
   }
 
+  onClickResendOtp(){
+    this.createVerifyForm();
+    this.verificationError = false;
+
+    this.isResendLoading = true;
+
+    this.authService.loginUser(this.resendOtpPayload)
+        .subscribe({
+          next: (responseData) => {
+            console.log('Resend successful:', responseData);
+            this.showVerificationForm = true;
+            this.emailToVerify = this.resendOtpPayload.email;
+            this.snackBar.open('OTP Resent', 'Close', {
+              duration: 4000,
+              panelClass: ['success-snackbar'],
+              verticalPosition: 'top',
+            });
+          },
+          error: (error) => {
+            console.error('Resend error:', error);
+            this.isResendLoading = false;
+            this.resendError = true;
+          },
+          complete: () => {
+            this.isResendLoading = false;
+          }
+        });
+  }
+
   onLoginFormSubmit() {
     if(this.loginForm.valid){
       this.isLoginLoading = true;
@@ -70,6 +101,7 @@ export class LoginScreenComponent implements OnInit {
               console.log('Login successful:', responseData);
               this.showVerificationForm = true;
               this.emailToVerify = payload.email;
+              this.resendOtpPayload = payload;
             },
             error: (error) => {
               console.error('Login error:', error);
@@ -89,13 +121,10 @@ export class LoginScreenComponent implements OnInit {
 
   onVerificationFormSubmit(){
     if(this.verificationForm.valid){
+      this.isVerificationLoading = true;
       const payload : VerifyCodeType = {
         email: this.emailToVerify,
         verificationCode: this.verificationForm.get('verificationCode').value
-      }
-
-      const fetchLogin : FetchLoginDataType = {
-        email: this.emailToVerify
       }
 
       console.log(payload);

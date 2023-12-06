@@ -64,10 +64,17 @@
                                     <span *ngIf="!isVerificationLoading">Confirm OTP</span>
                                 </button>
 
-                                <mat-error *ngIf="verificationError">Incorrect OTP</mat-error>
+                                <button mat-raised-button type="button" class="btn-danger pull-left" (click)="onClickResendOtp()" [disabled]="isResendLoading">
+                                    <span *ngIf="isResendLoading">Resending OTP...</span>
+                                    <span *ngIf="!isResendLoading">Resend OTP</span>
+                                </button>
+
 
 
                                 <div class="clearfix"></div>
+                                <mat-error *ngIf="resendError">Could not send OTP. Try again</mat-error>
+
+                                <mat-error *ngIf="verificationError">Incorrect OTP</mat-error>
 
 
                             </form>
