@@ -1,0 +1,89 @@
+<div class="login-main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-4">
+                <div *ngIf="!showVerificationForm" class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()" class="center-form flex align-items-center">
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email" formControlName="email" required>
+                                        <mat-error *ngIf="loginForm.get('email').hasError('required')">Email is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput  type="password" placeholder="Password" formControlName="password" required>
+                                        <mat-error *ngIf="loginForm.get('password').hasError('required')">Password is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isLoginLoading">
+                                <span *ngIf="isLoginLoading">Loading...</span>
+                                <span *ngIf="!isLoginLoading">Login</span>
+                            </button>
+                            <mat-error *ngIf="loginError">Incorrect email or password</mat-error>
+
+                            <div class="clearfix"></div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6 offset-md-3">
+                                    <p class="text-center">Don't have an account? <a routerLink="/register">Sign up</a></p>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div *ngIf="showVerificationForm" class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Enter OTP</h4>
+                        <p>Enter OTP sent to your email.</p>
+                    </div>
+                    <div class="card-body">
+                            <!-- ... (your verification form HTML) ... -->
+                            <form [formGroup]="verificationForm" (ngSubmit)="onVerificationFormSubmit()" class="center-form flex align-items-center">
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Verification Code" formControlName="verificationCode" required>
+                                            <mat-error *ngIf="verificationForm.get('verificationCode').hasError('required')">Code is required</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isVerificationLoading">
+                                    <span *ngIf="isVerificationLoading">Loading...</span>
+                                    <span *ngIf="!isVerificationLoading">Confirm OTP</span>
+                                </button>
+
+                                <button mat-raised-button type="button" class="btn-danger pull-left" (click)="onClickResendOtp()" [disabled]="isResendLoading">
+                                    <span *ngIf="isResendLoading">Resending OTP...</span>
+                                    <span *ngIf="!isResendLoading">Resend OTP</span>
+                                </button>
+
+
+
+                                <div class="clearfix"></div>
+                                <mat-error *ngIf="resendError">Could not send OTP. Try again</mat-error>
+
+                                <mat-error *ngIf="verificationError">Incorrect OTP</mat-error>
+
+
+                            </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
