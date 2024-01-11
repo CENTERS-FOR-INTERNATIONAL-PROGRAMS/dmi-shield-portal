@@ -5,19 +5,19 @@
                 <div class="card">
                     <div class="card-header card-header-danger" style="display: flex; justify-content: space-between; align-items: start;">
 
-                        <h4 class="card-title">Upload your data</h4>
+                        <h4 class="card-title">Upload data</h4>
 
-                        <mat-form-field>
-                            <mat-label style="color: white;">Select CSV Type to Download</mat-label>
+                        <!-- <mat-form-field>
+                            <mat-label style="color: white;">Data to be Uploaded</mat-label>
                             <mat-select style="color: white;" [(value)]="selectedCsvType">
                                 <mat-option *ngFor="let csvType of csvTypes" [value]="csvType.value">
                                     {{ csvType.viewValue }}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
 
                         <button mat-raised-button type="submit" class=" mt-2 mat-button mat-button-base mat-raised-button custom-white-button card-category " style="color: red;" (click)="downloadCSV()">
-                            Download Sample CSV
+                           
                         </button>
                     </div>
                     <div class="card-body">
@@ -73,8 +73,8 @@
                     </div>
                     <div class="card-body">
                         <ul>
-                            <li>6th November 2023 - 150 Records</li>
-                            <li>13th November 2023 - 150 Records</li>
+                            <li>10th January 2024 - 110 Records</li>
+                            <li>15th December 2023 - 150 Records</li>
                             <li>20th November 2023 - 150 Records</li>
                         </ul>
                     </div>
