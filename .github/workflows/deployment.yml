@@ -1,0 +1,33 @@
+name: Deploy Shield Dashboard
+on:
+  push:
+    branches: [ main ]
+jobs:
+
+  build:
+    name: Deploy Shield Dashboard
+    runs-on: ubuntu-latest
+    steps:
+    - name: updating and deploying app
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+        #Backup existing dashboard version
+          sudo cp -rf /var/lib/shield_deploy_dash/* /tmp/shield_dashboard_backup/
+        #Update the current dashboard
+          cd /var/lib/shield_workflows/dmi-shield-dashboard/
+          sudo rm -rf dist
+          sudo rm package-lock.json
+          sudo rm -rf node_modules
+          sudo git pull
+          sudo npm install
+          sudo ng build --configuration production
+        #Remove old dashboard version
+          sudo rm -rf /var/lib/shield_deploy_dash/*
+        #Copy the new dashboard to production directory
+          sudo cp -rf dist/ /var/lib/shield_deploy_dash/
+          echo "Dashboard is upto date! Deployment successful."
