@@ -1,0 +1,33 @@
+name: Deploy Shield Portal
+on:
+  push:
+    branches: [ main ]
+jobs:
+
+  build:
+    name: Deploy Shield Portal
+    runs-on: ubuntu-latest
+    steps:
+    - name: updating and deploying app
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          #Backup existing portal version
+          sudo cp -rf /var/lib/shield_deploy_portal/* /tmp/shield_portal_backup/
+          #Update the current portal
+          cd /var/lib/shield_workflows/dmi-shield-portal/
+          sudo rm -rf dist
+          sudo rm package-lock.json
+          sudo rm -rf node_modules
+          sudo git pull
+          sudo npm install
+          sudo ng build --configuration production
+          #Remove old portal version
+          sudo rm -rf /var/lib/shield_deploy_portal/*
+          #Copy the new portal to production directory
+          sudo cp -rf dist/ /var/lib/shield_deploy_portal/
+          echo "SHIELD Portal is upto date! Deployment successful."
