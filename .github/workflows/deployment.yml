@@ -16,9 +16,9 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ secrets.PORT }}
         script: |
-        #Backup existing dashboard version
+          #Backup existing dashboard version
           sudo cp -rf /var/lib/shield_deploy_dash/* /tmp/shield_dashboard_backup/
-        #Update the current dashboard
+          #Update the current dashboard
           cd /var/lib/shield_workflows/dmi-shield-dashboard/
           sudo rm -rf dist
           sudo rm package-lock.json
@@ -26,8 +26,8 @@ jobs:
           sudo git pull
           sudo npm install
           sudo ng build --configuration production
-        #Remove old dashboard version
+          #Remove old dashboard version
           sudo rm -rf /var/lib/shield_deploy_dash/*
-        #Copy the new dashboard to production directory
+          #Copy the new dashboard to production directory
           sudo cp -rf dist/ /var/lib/shield_deploy_dash/
           echo "Dashboard is upto date! Deployment successful."
