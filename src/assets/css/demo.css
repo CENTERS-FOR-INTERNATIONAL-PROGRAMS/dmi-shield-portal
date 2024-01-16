@@ -28,3 +28,6 @@
   position: absolute;
   width: 260px;
 }
+.mat-card-header {
+  background-color: red;
+}

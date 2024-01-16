@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header card-header-danger" style="display: flex; justify-content: space-between; align-items: start;">
+                    <div class="card-header card-header-"  style="display: flex; justify-content: space-between; align-items: start;background-color:#15A5CA">
 
                         <h4 class="card-title">Upload Data</h4>
 
@@ -32,7 +32,7 @@
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="csvDate" required>
+                                        <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="csvDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                         <mat-error *ngIf="uploadCsvFrom.get('csvDate').hasError('required')">Please pick a date</mat-error>
@@ -41,7 +41,7 @@
 
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <mat-select formControlName="csvType" placeholder="Type of data" required>
+                                        <mat-select formControlName="csvType" placeholder="Data file" required>
                                             <mat-option *ngFor="let action of taken_actions" [value]="action.value">
                                                 {{ action.viewValue }}
                                             </mat-option>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="isUploadLoading">
+                            <button mat-raised-button type="submit" class="btn btn-primary pull-right" [disabled]="isUploadLoading">
                                 <span *ngIf="isUploadLoading">Submitting...</span>
                                 <span *ngIf="!isUploadLoading">Upload File</span>
                             </button>
@@ -68,7 +68,7 @@
 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-" style="background-color: #15A5CA;">
                         <h4 class="card-title">Submitted Records History</h4>
                     </div>
                     <div class="card-body">
