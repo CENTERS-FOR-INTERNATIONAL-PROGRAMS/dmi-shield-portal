@@ -30,11 +30,13 @@ export class DashboardComponent implements OnInit {
     taken_actions = [
         { value: 'sari_ili', viewValue: 'SARI ILI' },
         { value: 'moh_503', viewValue: 'MOH 503' },
+        { value: 'IDSR Climate Diseases', viewValue: 'IDSR Climate Diseases' },
     ];
 
     csvTypes = [
         { value: 'sari_ili', viewValue: 'SARI ILI' },
         { value: 'moh_503', viewValue: 'MOH 503' },
+        { value: 'IDSR Climate Diseases', viewValue: 'IDSR Climate Diseases' },
     ];
 
     downloadCSV() {

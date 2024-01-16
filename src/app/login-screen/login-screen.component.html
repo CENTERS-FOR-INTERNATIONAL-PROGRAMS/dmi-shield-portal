@@ -3,10 +3,10 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-md-4">
                 <div *ngIf="!showVerificationForm" class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-" style="background-color: #15A5CA;">
                         <h4 class="card-title">Login</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ">
                         <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()" class="center-form flex align-items-center">
                             <div class="row">
                                 <div class="col-md-6 offset-md-3">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div *ngIf="showVerificationForm" class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-" style="background-color: #15A5CA;">
                         <h4 class="card-title">Enter OTP</h4>
                         <p>Enter OTP sent to your email.</p>
                     </div>
@@ -64,7 +64,7 @@
                                     <span *ngIf="!isVerificationLoading">Confirm OTP</span>
                                 </button>
 
-                                <button mat-raised-button type="button" class="btn-danger pull-left" (click)="onClickResendOtp()" [disabled]="isResendLoading">
+                                <button mat-raised-button type="button" class="btn-primary pull-left" (click)="onClickResendOtp()" [disabled]="isResendLoading">
                                     <span *ngIf="isResendLoading">Resending OTP...</span>
                                     <span *ngIf="!isResendLoading">Resend OTP</span>
                                 </button>
